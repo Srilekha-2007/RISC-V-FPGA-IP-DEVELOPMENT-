@@ -57,16 +57,21 @@ cd /workspaces/Task-1/vsdfpga_labs/basicRISCV/Firmware
 
 ## Mandatory Understanding Check
 ##### Q1: Where is the RISC-V program located in the vsd-riscv2 repository?
- The primary reference source files are organized inside the samples/ folder profile paths (such as sum1ton.c and 1ton_custom.c).
+ The reference RISC-V program is located in the samples directory. An example program used during this task is:
 
+samples/sum1ton.c
 ##### Q2: How is the program compiled and loaded into memory?
- The original high-level C code is targeted and cross-compiled using the RISC-V GNU toolchain command riscv64-unknown-elf-gcc -o sum1ton.o sum1ton.c. For physical implementation, the compiler output binary is mapped out into standardized memory structural map layouts (like firmware.hex) which define block RAM states during physical FPGA gate array hardware synthesis routing.
+The C program is compiled using the RISC-V cross compiler:
+       riscv64-unknown-elf-gcc -o sum1ton.o sum1ton.c
+
+The generated executable is then loaded and executed by the Spike ISA Simulator using the Proxy Kernel (pk):
+       spike pk sum1ton.o
 
 ##### Q3: How does the RISC-V core access memory and memory-mapped IO?
- The RISC-V core communicates using Memory-Mapped I/O (MMIO). Rather than using unique specialized port I/O operational calls, both internal memory units (RAM/ROM) and physical interface peripheral registers exist under a single, unified system address layout scheme. The core interacts with these components via standard assembly-level memory pointer transfers like Load Word (lw) and Store Word (sw).
+The RISC-V core accesses memory and peripherals through load and store instructions. Memory-mapped IO devices are assigned specific address ranges. The processor communicates with peripherals by reading from and writing to those mapped addresses.
 
 ##### Q4: Where would a new FPGA IP block logically integrate in this system?
- A new external hardware IP block attaches structurally to the main system interconnect bus matrix fabric (such as an AXI, AHB, or Wishbone protocol bus) acting as an addressing target slave. By assigning its target configuration registers to an unmapped slice of the standard global MMIO address window space, the primary RISC-V CPU core can directly govern the peripheral logic block through simple register pointer reads and writes.
+A new FPGA IP block would typically be connected as a memory-mapped peripheral on the system bus. The RISC-V processor can then access the IP through dedicated address locations using standard load and store operations.
 
 ## Environment Confirmation Statement
 System Environment Profile: GitHub Codespace Only 
