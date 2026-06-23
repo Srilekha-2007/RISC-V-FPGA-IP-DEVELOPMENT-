@@ -68,5 +68,5 @@ cd /workspaces/Task-1/vsdfpga_labs/basicRISCV/Firmware
 ##### Q4: Where would a new FPGA IP block logically integrate in this system?
  A new external hardware IP block attaches structurally to the main system interconnect bus matrix fabric (such as an AXI, AHB, or Wishbone protocol bus) acting as an addressing target slave. By assigning its target configuration registers to an unmapped slice of the standard global MMIO address window space, the primary RISC-V CPU core can directly govern the peripheral logic block through simple register pointer reads and writes.
 
-4. Environment Confirmation Statement
-System Environment Profile: GitHub Codespace Only (Cloud-Hosted Dev Container)
+## Environment Confirmation Statement
+System Environment Profile: GitHub Codespace Only 
