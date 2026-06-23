@@ -1,4 +1,4 @@
-# Task 1: Environment Setup & RISC-V Reference Bring-Up Report
+# Task 1: Environment Setup & RISC-V Reference Bring-Up 
 
 
 ## 1. Experimental Logs & Execution Proof
